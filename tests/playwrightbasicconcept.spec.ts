@@ -1,52 +1,60 @@
-import{test,expect,Locator} from '@playwright/test'
+import { test, expect, Locator } from '@playwright/test'
 
-test("Practice of Basic Concepts of Playwright" ,async({page})=>{
-await page.goto("https://testautomationpractice.blogspot.com/");
+test('Practice of Basic Concepts of Playwright', async ({ page }) => {
+  // Navigate to the test website
+  await page.goto('https://testautomationpractice.blogspot.com/')
 
-const Title:String = await page.title();
-console.log("Title of the page is : " , Title);
-await expect(page).toHaveTitle("Automation Testing Practice");
+  // Step 1: Verify page title
+  const title: string = await page.title()
+  console.log('Page Title:', title)
+  await expect(page).toHaveTitle('Automation Testing Practice')
 
+  // Step 2: Verify page URL
+  const url: string = await page.url()
+  console.log('Page URL:', url)
+  await expect(page).toHaveURL('https://testautomationpractice.blogspot.com/')
 
-const URL :String =await page.url();
-console.log("URL of the Application is : " , URL);
-await expect(page).toHaveURL("https://testautomationpractice.blogspot.com/");
+  // Step 3: Verify heading text is visible
+  const headingText: Locator = page.getByText('Automation Testing Practice')
+  await expect(headingText).toBeVisible()
 
-const Text : Locator= page.getByText("Automation Testing Practice");
-await expect(Text).toBeVisible();
+  // Step 4: Fill name field
+  const nameField: Locator = page.getByPlaceholder('Enter Name')
+  await expect(nameField).toBeEnabled()
+  await nameField.fill('Ujjwal Tyagi')
 
-const Name : Locator=page.getByPlaceholder("Enter Name");
-await expect(Name).toBeEnabled();
-await Name.fill("Ujjwal Tyagi");
+  // Step 5: Fill email field
+  const emailField: Locator = page.getByPlaceholder('Enter EMail')
+  await expect(emailField).toBeEnabled()
+  await emailField.fill('ujjwaltyagi9700@gmail.com')
 
-const Email : Locator= page.getByPlaceholder("Enter EMail");
-await expect(Email).toBeEnabled();
-await Email.fill("ujjwaltyagi9700@gmail.com");
+  // Step 6: Fill phone field
+  const phoneField: Locator = page.locator('#phone')
+  await expect(phoneField).toBeEnabled()
+  await phoneField.fill('9756360213')
 
-const Phone : Locator =page.locator("#phone");
-await expect(Phone).toBeEnabled();
-await Phone.fill("9756360213");
+  // Step 7: Select Male radio button
+  const maleRadioButton: Locator = page.locator('#male')
+  await expect(maleRadioButton).toBeEnabled()
+  await maleRadioButton.click()
+  await expect(maleRadioButton).toBeChecked()
 
-const MaleRadioButton= page.locator("#male");
-await expect(MaleRadioButton).toBeEnabled();
-await MaleRadioButton.click();
-await expect(MaleRadioButton).toBeChecked();
+  // Step 8: Check Sunday checkbox
+  const sundayCheckBox: Locator = page.locator('#sunday')
+  await expect(sundayCheckBox).toBeEnabled()
+  await sundayCheckBox.click()
+  await expect(sundayCheckBox).toBeChecked()
 
-const CheckBox =page.locator("#sunday");
-await expect(CheckBox).toBeEnabled();
-await CheckBox.click();
-await expect(CheckBox).toBeChecked();
+  // Step 9: Select country from dropdown
+  await page.locator('#country').selectOption({ value: 'germany' })
 
-//await page.locator('#country').selectOption('India'); 
-await page.locator("#country").selectOption({value :'germany'});
+  // Step 10: Handle alert dialog
+  page.on('dialog', async dialog => {
+    console.log('Alert Message:', dialog.message())
+    // Accept the alert
+    await dialog.accept()
+  })
 
-page.on('dialog', async dialog => {
-
-    console.log("Alert Message is : " + dialog.message());
-
-    await dialog.accept();
-
-});
-
-await page.locator("#alertBtn").click();
+  // Click the alert button to trigger the dialog
+  await page.locator('#alertBtn').click()
 })

@@ -1,37 +1,43 @@
-import {test, expect, Locator} from "@playwright/test";
+import { test, expect, Locator } from '@playwright/test'
 
+test('Single Select Drop down', async ({ page }) => {
+  // Navigate to the test website
+  await page.goto('https://testautomationpractice.blogspot.com/')
 
-test("Single Select Drop down",async ({page})=>{
+  // Method 1: Select by visible text
+  // await page.locator('#country').selectOption('India')
+  
+  // Method 2: Select by value attribute
+  // await page.locator('#country').selectOption({ value: 'uk' })
+  
+  // Method 3: Select by label
+  // await page.locator('#country').selectOption({ label: 'India' })
+  
+  // Method 4: Select by index (position)
+  // await page.locator('#country').selectOption({ index: 3 })
 
-    await page.goto('https://testautomationpractice.blogspot.com/');
+  // Step 1: Get all dropdown options
+  const dropdownOptions: Locator = page.locator('#country>option')
+  
+  // Step 2: Verify total number of options in the dropdown
+  await expect(dropdownOptions).toHaveCount(10)
+  console.log('Total options in dropdown: 10')
 
-    //1) select option from the drop down ( 4 ways)
+  // Step 3: Get all option texts and trim whitespace
+  const optionsText: string[] = (await dropdownOptions.allTextContents())
+    .map(text => text.trim())
+  
+  console.log('All dropdown options:', optionsText)
 
-    //await page.locator('#country').selectOption('India');   // visible text
-    //await page.locator('#country').selectOption({value:'uk'});   // by using value attribute
-    //await page.locator('#country').selectOption({label:'India'});   // by using label
-    //await page.locator('#country').selectOption({index:3});   // by using index
-    
-    
-    //2) check number of options in the dropdown(count)
-    const dropdownOptions:Locator= page.locator('#country>option');
-    await expect(dropdownOptions).toHaveCount(10);
+  // Step 4: Verify Japan exists in the dropdown
+  expect(optionsText).toContain('Japan')
 
+  // Step 5: Print all dropdown options to console
+  console.log('Dropdown options:')
+  for (const option of optionsText) {
+    console.log('  - ' + option)
+  }
 
-    //3) check an option present in the dropdown
-
-    const optionsText:string[]=(await dropdownOptions.allTextContents()).map(text=>text.trim());   
-    console.log(optionsText)
-
-    expect(optionsText).toContain('Japan'); // Check if the array contains "Japan"
-
-
-    //4) printing options from the drop down
-    for(const option of optionsText)
-    {
-        console.log(option)
-    }
-
-
-    await page.waitForTimeout(3000);
+  // Wait for visibility
+  await page.waitForTimeout(3000)
 })

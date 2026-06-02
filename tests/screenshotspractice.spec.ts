@@ -1,10 +1,16 @@
-import { expect,test } from "@playwright/test";
+import { expect, test } from '@playwright/test'
 
-test("verify the screenshots functionality", async({page})=>{
-    await page.goto("https://myschoolone.com/hisp");
+test('Verify the screenshots functionality', async ({ page }) => {
+  // Navigate to the website
+  await page.goto('https://myschoolone.com/hisp')
 
-    const timestamp=Date.now();
-    //full page
-    await page.screenshot({path:'screenshots/'+'school'+timestamp+'.png'});
-
+  // Create a unique timestamp for each screenshot
+  const timestamp = Date.now()
+  
+  // Capture full page screenshot and save it
+  await page.screenshot({
+    path: `screenshots/school${timestamp}.png`
+  })
+  
+  console.log(`Screenshot saved: school${timestamp}.png`)
 })

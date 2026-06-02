@@ -1,18 +1,25 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '@playwright/test'
 
-test('test', async ({ page }) => {
-  await page.goto('https://mypayroll.in/request-demo.html');
-  await expect(page.getByRole('navigation').getByRole('link', { name: 'Awesome Image' })).toBeVisible();
-
-  await page.getByRole('textbox', { name: 'Company name' }).fill('Stuti ');
+// Note: This is a generated test from Playwright Codegen
+test('Fill demo request form', async ({ page }) => {
+  // Navigate to the demo request page
+  await page.goto('https://mypayroll.in/request-demo.html')
   
-  await page.getByRole('textbox', { name: 'Company name' }).fill('Stuti Technologies pvt ltd');
+  // Verify the navigation logo is visible
+  await expect(page.getByRole('navigation').getByRole('link', { name: 'Awesome Image' })).toBeVisible()
 
-  await page.getByRole('textbox', { name: 'First name' }).fill('ujjwal');
+  // Step 1: Fill company name field
+  await page.getByRole('textbox', { name: 'Company name' }).fill('Stuti Technologies pvt ltd')
 
-  await page.getByRole('textbox', { name: 'Last name' }).fill('Tyagi');
+  // Step 2: Fill first name field
+  await page.getByRole('textbox', { name: 'First name' }).fill('ujjwal')
 
-  await page.getByRole('textbox', { name: 'Your role with company' }).fill('MD');
+  // Step 3: Fill last name field
+  await page.getByRole('textbox', { name: 'Last name' }).fill('Tyagi')
 
-  await page.getByRole('textbox', { name: 'Email address' }).fill('ujjwaltyagi9700@gmail.com');
-});
+  // Step 4: Fill role field
+  await page.getByRole('textbox', { name: 'Your role with company' }).fill('MD')
+
+  // Step 5: Fill email address field
+  await page.getByRole('textbox', { name: 'Email address' }).fill('ujjwaltyagi9700@gmail.com')
+})
