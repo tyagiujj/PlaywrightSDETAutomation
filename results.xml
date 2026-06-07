@@ -1,0 +1,12 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="19.792348">
+<testsuite name="automationExerciseSignup.spec.ts" timestamp="2026-06-07T08:07:29.429Z" hostname="chromium" tests="1" failures="0" skipped="0" time="16.488" errors="0">
+<testcase name="Verify the Sign up functionality of Automation Exercise" classname="automationExerciseSignup.spec.ts" time="16.488">
+<system-out>
+<![CDATA[Page URL: https://automationexercise.com/login
+Page Title: Automation Exercise - Signup / Login
+Generated Email: ujjwal1780819660831@gmail.com
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

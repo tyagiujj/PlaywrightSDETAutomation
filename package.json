@@ -12,12 +12,19 @@
     "test:firefox": "playwright test --project=firefox",
     "test:webkit": "playwright test --project=webkit"
   },
-  "keywords": ["playwright", "automation", "testing", "typescript", "e2e"],
+  "keywords": [
+    "playwright",
+    "automation",
+    "testing",
+    "typescript",
+    "e2e"
+  ],
   "author": "Ujjwal Tyagi",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
     "@playwright/test": "^1.60.0",
-    "@types/node": "^25.8.0"
+    "@types/node": "^25.8.0",
+    "allure-playwright": "^3.9.0"
   }
 }
